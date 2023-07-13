@@ -45,20 +45,13 @@ def buid_web_page (hash)
     end
     print
   end
-  
-  puts ("<html>")
-  puts ("<head>")
-  puts ("</head>")
-  puts ("<body>")
-  puts ("<ul>")
+ 
+  File.new("image_list.html", "w")
+  File.write("image_list.html", ["<html>", "<head>", "</head>", "<body>", "<ul>", ""].join("\n"), mode: "a")
+  File.write("image_list.html", [transform_level2.map { |img| "    <li><img src='#{img}'></li>" }].join("\n"), mode: "a")
+  File.write("image_list.html", ["</ul>", "</body>", "</html>"].join("\n"), mode: "a")
 
-  transform_level2.map do |img|
-    puts ("    <li><img src='#{img}'></li>")
-  end
-
-  puts ("</ul>")
-  puts ("</body>")
-  puts ("</html>")
+  return
 
 end
 
@@ -101,9 +94,9 @@ puts nasa_api_hash
 puts
 
 # Usando el metodo buid_web_page: envio del hash con info de la api NASA, guardado en una variable
-mostrar_html = buid_web_page(nasa_api_hash)
+html = buid_web_page(nasa_api_hash)
 # Mostar resultado de metodo buid_web_page
-puts mostrar_html
+puts html
 
 # Usando el metodo photos_count: envio del hash con info de la api NASA y guardado en una variable
 mostrar_camaras_cantidades = photos_count(nasa_api_hash)
